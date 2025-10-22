@@ -63,6 +63,26 @@ const DashBoard = () => {
               </th>
             </tr>
           </thead>
+          <tbody className="text-sm">
+            {dashboardData.bookings.map((item, index) => (
+              <tr key={index}>
+                <td className="py-3 px-4 text-gray-700 border-t border-gray-300">
+                  {item.user.username}
+                </td>
+                <td className="py-3 px-4 text-gray-700 border-t border-gray-300 max-sm:hidden">
+                  {item.room.roomType}
+                </td>
+                <td className="py-3 px-4 text-gray-700 border-t border-gray-300 text-center">
+                  ${item.totalPrice}
+                </td>
+                <td className="py-3 px-4 border-t border-gray-300 flex">
+                        <button>
+                            {item.isPaid ? 'Completed' : 'Pending'}
+                        </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>
