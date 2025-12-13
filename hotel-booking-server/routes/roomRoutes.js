@@ -6,6 +6,7 @@ import {
   getRoomById,
   updateRoom,
   deleteRoom,
+  getRoomsByOwner,
 } from "../controllers/roomController.js";
 import { clerkMiddleware } from "@clerk/express";
 
@@ -14,6 +15,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 router.post("/", clerkMiddleware(), upload.array("images"), createRoom);
 router.get("/", getAllRooms);
+router.get("/owner", clerkMiddleware(), getRoomsByOwner);
 router.get("/:id", getRoomById);
 router.put("/:id", clerkMiddleware(), upload.array("images"), updateRoom);
 router.delete("/:id", clerkMiddleware(), deleteRoom);

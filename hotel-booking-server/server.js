@@ -5,6 +5,8 @@ import connectDB from "./configs/db.js";
 import { clerkMiddleware } from '@clerk/express'
 import clerkWebhooks from "./controllers/clerkWebhooks.js";
 import roomRoutes from "./routes/roomRoutes.js";
+import bookingRoutes from "./routes/bookingRoutes.js";
+import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 
 connectDB()
@@ -19,7 +21,13 @@ app.use(express.json());
 app.use("/api/clerk", clerkWebhooks);
 
 // Room routes
-app.use("/api/rooms", clerkMiddleware(), roomRoutes);
+app.use("/api/rooms", roomRoutes);
+
+// Booking routes
+app.use("/api/bookings", bookingRoutes);
+
+// Dashboard routes
+app.use("/api/dashboard", dashboardRoutes);
 
 app.get("/", (req, res) => res.send("API is working"));
 

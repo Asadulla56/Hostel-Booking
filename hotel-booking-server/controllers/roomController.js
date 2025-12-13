@@ -109,6 +109,16 @@ export const updateRoom = async (req, res) => {
   }
 };
 
+export const getRoomsByOwner = async (req, res) => {
+  try {
+    const ownerId = req.auth.userId;
+    const rooms = await Room.find({ owner: ownerId }).populate("owner", "username");
+    res.status(200).json(rooms);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 export const deleteRoom = async (req, res) => {
   try {
     const room = await Room.findById(req.params.id);
